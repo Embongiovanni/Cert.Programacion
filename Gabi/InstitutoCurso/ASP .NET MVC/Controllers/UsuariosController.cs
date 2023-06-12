@@ -1,18 +1,17 @@
-﻿using ASP_.NET_MVC.Models;
+﻿using ASP_.NET_MVC.Data;
+using ASP_.NET_MVC.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Data.Entity;
-
-
+using EntityState = Microsoft.EntityFrameworkCore.EntityState;
 
 namespace ASP_.NET_MVC.Controllers
 {
     public class UsuariosController : Controller
     {
-        private InstitutoDbContext _context;
+        private readonly InstitutoDbContext _context;
 
-        public UsuariosController()
+        public UsuariosController(InstitutoDbContext context)
         {
-            _context = new InstitutoDbContext();
+            _context = context;
         }
 
         // Acción para registrar un nuevo usuario
@@ -30,6 +29,7 @@ namespace ASP_.NET_MVC.Controllers
                 // Guardar el nuevo usuario en la base de datos
                 _context.Usuarios.Add(usuario);
                 _context.SaveChanges();
+                TempData["Mensaje"] = "Usuario registrado exitosamente";
 
                 // Redirigir a la página de inicio de sesión o a otra vista según tus necesidades
                 return RedirectToAction("Login");
@@ -59,6 +59,7 @@ namespace ASP_.NET_MVC.Controllers
             {
                 _context.Entry(usuario).State = EntityState.Modified;
                 _context.SaveChanges();
+                TempData["Mensaje"] = "Usuario editado exitosamente";
                 return RedirectToAction("Index", "Home"); // Redirigir a la página principal
             }
 

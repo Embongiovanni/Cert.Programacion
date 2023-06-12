@@ -1,16 +1,18 @@
-﻿using ASP_.NET_MVC.Models;
+﻿using ASP_.NET_MVC.Data;
+using ASP_.NET_MVC.Models;
 using Microsoft.AspNetCore.Mvc;
+using EntityState = Microsoft.EntityFrameworkCore.EntityState;
 
 
 namespace ASP_.NET_MVC.Controllers
 {
     public class CursosController : Controller
     {
-        private InstitutoDbContext _context;
+        private readonly InstitutoDbContext _context;
 
-        public CursosController()
+        public CursosController(InstitutoDbContext context)
         {
-            _context = new InstitutoDbContext();
+            _context = context;
         }
 
         // Acción para mostrar los cursos disponibles
