@@ -15,6 +15,31 @@ namespace ASP_.NET_MVC.Controllers
             _context = context;
         }
 
+        // Acción para registrar un nuevo curso
+        [HttpGet]
+        public ActionResult RegistroCursos()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult RegistroCursos(Curso curso)
+        {
+            if (ModelState.IsValid)
+            {
+                // Guardar el nuevo usuario en la base de datos
+                _context.Cursos.Add(curso);
+                _context.SaveChanges();
+                TempData["Mensaje"] = "Curso registrado exitosamente";
+
+                // Redirigir a la página de inicio de sesión o a otra vista según tus necesidades
+                return RedirectToAction("Index", "Home");
+            }
+
+            return View(curso);
+        }
+
+
         // Acción para mostrar los cursos disponibles
         public ActionResult Index()
         {

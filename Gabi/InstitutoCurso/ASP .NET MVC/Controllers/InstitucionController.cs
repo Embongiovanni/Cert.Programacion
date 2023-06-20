@@ -14,6 +14,30 @@ namespace ASP_.NET_MVC.Controllers
             _context = context;
         }
 
+        // Acción para registrar una nueva institucion
+        [HttpGet]
+        public ActionResult RegistroInstitucion()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult RegistroInstitucion(Institucion institucion)
+        {
+            if (ModelState.IsValid)
+            {
+                // Guardar el nuevo usuario en la base de datos
+                _context.Instituciones.Add(institucion);
+                _context.SaveChanges();
+                TempData["Mensaje"] = "Institucion registrada exitosamente";
+
+                // Redirigir a la página de inicio de sesión o a otra vista según tus necesidades
+                return RedirectToAction("Index", "Home");
+            }
+
+            return View(institucion);
+        }
+
         // Acción para mostrar la descripción de la institución y los cursos ofrecidos
         public ActionResult Index()
         {

@@ -31,8 +31,8 @@ namespace ASP_.NET_MVC.Controllers
                 _context.SaveChanges();
                 TempData["Mensaje"] = "Usuario registrado exitosamente";
 
-                // Redirigir a la página de inicio de sesión o a otra vista según tus necesidades
-                return RedirectToAction("Login");
+                // Redirigir a la página de inicio de sesión o a otra vista 
+                return RedirectToAction("Registro", "Usuarios");
             }
 
             return View(usuario);
@@ -60,7 +60,7 @@ namespace ASP_.NET_MVC.Controllers
                 _context.Entry(usuario).State = EntityState.Modified;
                 _context.SaveChanges();
                 TempData["Mensaje"] = "Usuario editado exitosamente";
-                return RedirectToAction("Index", "Home"); // Redirigir a la página principal
+                return RedirectToAction("Editar", "Usuarios"); // Redirigir a la página principal
             }
 
             return View(usuario);

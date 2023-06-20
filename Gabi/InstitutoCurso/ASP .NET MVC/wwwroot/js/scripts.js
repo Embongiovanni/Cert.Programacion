@@ -23,6 +23,10 @@ window.addEventListener('DOMContentLoaded', event => {
 
     };
 
+    $(document).ready(function () {
+        $('[data-toggle="dropdown"]').dropdown();
+    });
+
     // Shrink the navbar 
     navbarShrink();
 
